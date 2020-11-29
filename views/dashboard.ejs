@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.min.js"></script>	<!-- Thư viện vẽ chart -->
 <link rel="icon" type="image/png" href="../img/tabicon.png"><!--  Hiển thị hình cho tab -->
-<!-- <link rel="stylesheet" href="../css/dhthistory.css"> -->
+<link rel="stylesheet" href="../css/dhthistory.css">
 <link rel="stylesheet" href="../css/dashboard.css">	<!-- include File CSS tự tạo -->
 		
 <style>
@@ -67,7 +67,7 @@ body {
 				<span style = "float: right;">Tự dộng</span>
 				</td>
 				<td>
-					<img id = "down" width="80px" height="80px" style="cursor: pointer;" onclick="displayChart()" title="Lịch sử điện áp" src="../img/History.png">
+					<img id = "chart" width="80px" height="80px" style="cursor: pointer;" onclick="showChart()" title="Lịch sử điện áp" src="../img/History.png">
 				</td>
 			</tr>
 
@@ -77,14 +77,14 @@ body {
  		<div class="modal-content animate"  style = "padding: 35px; width: 80%; height: 80%">
 			<div title = "Chọn ngày">
 				<input id = "idDateSelection" class = "myDateSelection" type="date" style = "float: left;">
-				<button id = "idDateSearch" class = "myDateSearchButton" onclick="displayHistory()" style = "float: left;">Search</button>
+				<button id = "idDateSearch" class = "myDateSearchButton" onclick="showHistory()" style = "float: left;">Search</button>
 			</div>
 			<div title = "Số lượng hiển thị">
 				<input id = "idQuantitySelection" class = "myQuantitySelection" type="number" min = "0"; max = "50"; style = "float: left;">
 				<button id = "idQuantityApply" class = "myDateSearchButton" style = "float: left;">Apply</button>
 			</div>
 			<div style = "float:right;">
-				<img id = "closeHistory" width="20px" height="20px" style="cursor: pointer;" onclick="closeChart()" title="Đóng lịch sử" src="../img/close.png">
+				<img id = "closeHistory" width="20px" height="20px" style="cursor: pointer;" onclick="closeChart()" src="../img/close.png">
 			</div>
       		<div style = "height: 95%; width: 100%;">
 				<canvas id="myChart"></canvas>
@@ -97,6 +97,7 @@ body {
 
 <script src ="https://code.jquery.com/jquery-3.4.1.js"></script>
 <script src = "/socket.io/socket.io.js"></script>
+<script src = "/functions/chart.js"></script>
 <script src = "/functions/control.js"></script>
 <!-- <script src = "/functions/history.js"></script>
 <script src = "/functions/dashboard.js"></script> -->

@@ -49,12 +49,17 @@ io.on("connection", function(socket)
 
   // Lắng nghe route "GET-HISTORY" từ các CLIENTS
   // Hàm này truy xuất database và gửi giá trị lịch sử energy đến CLIENT đã gọi nó
-  socket.on("GET-HISTORY", function(date) {
+  socket.on("GET_CHART_DATA", function(date) {
     async function getHistory() {
       result = await db.queryGetHistory(date); 
-      if(result != "queryGetHistory-ERROR")
-        socket.emit("ENERGY-HISTORY",result);
-      else console.log(result);
+      if(result == "queryGetHistory-ERROR")
+      {
+        socket.emit("ERROR",result);
+        console.log(result);
+      }
+      else {
+        socket.emit("ENERGY_DATA",result);
+      }
     }  
     getHistory(); // Thực thi
   });

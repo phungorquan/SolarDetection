@@ -14,11 +14,14 @@ var pool = mysql.createPool({
 exports.queryGetHistory = function (date) {
 	return new Promise (function (resolve, reject) {
 		pool.query("SELECT value,time FROM history where date = '" + date +"';", function(err, rows, fields) { // Truy vấn
-			if (err) reject(err); 
+			if (err){
+				resolve("queryGetHistory-ERROR");
+				return;
+			} 
 			if(rows.length>0){
 				resolve(rows);
 			}
-			else resolve("queryGetHistory-ERROR");
+			else resolve("EMPTY_DATA");
 		});
 	});
 }
