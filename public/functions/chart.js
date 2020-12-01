@@ -142,7 +142,8 @@ function showHistory()
       showChart();
     else
     {
-      socket.emit("GET_CHART_DATA",getInputDate); // Gửi đến server để yêu cầu dữ liệu ứng với ngày input
+      getDate = getInputDate;
+      socket.emit("GET_CHART_DATA",getDate); // Gửi đến server để yêu cầu dữ liệu ứng với ngày input
     }
   }
 }
