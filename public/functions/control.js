@@ -4,7 +4,7 @@ var pressIntervalUpdate;
 var mouseIsDown = false;
 var controlOnce = false;
 
-$(document).ready(function() {
+  socket.emit("GET_MODE_STATUS");
 
   // Nhận các thông báo về error thông qua route "ERROR"
   socket.on("ERROR",function(error)
@@ -36,7 +36,11 @@ $(document).ready(function() {
       drawChart(0,0,getDate);
     }
   });
-});
+
+  socket.on("MODE_WAS_CHANGED",function(stt)
+  {
+    document.getElementById('modeSlider').checked = stt;
+  });
 
 // Hàm này điều khiển chạy mỗi khi nhấn và nhả liền
 function controlDirection(dir)
@@ -44,22 +48,27 @@ function controlDirection(dir)
   clearInterval(pressIntervalUpdate);
   if(controlOnce == true)
   {
-    // var tmp = 0;
-    // switch(dir)
-    // {
-    //   case "left": tmp = "1l"; break;
-    //   case "right": tmp = "2r"; break;
-    //   case "up": tmp = "3u"; break;
-    //   case "down": tmp = "4d"; break;
-    //   default: break;
-    // }
-    socket.emit("CONTROL-DIRECTIONS",dir+"o"); // Gửi thiết bị và giá trị trạng thái muốn điều khiển đến SERVER
+    var tmp = 0;
+    switch(dir)
+    {
+      case "left": tmp = "1l"; break;
+      case "right": tmp = "2r"; break;
+      case "up": tmp = "3u"; break;
+      case "down": tmp = "4d"; break;
+      default: break;
+    }
+    socket.emit("CONTROL_DIRECTIONS",tmp); // Gửi thiết bị và giá trị trạng thái muốn điều khiển đến SERVER
   }
   else{
     controlOnce = true;
   } 
 }
 
+function modeChange()
+{
+  var getMode =  document.getElementById('modeSlider').checked;
+  socket.emit("SAVE_MODE_STATUS",getMode);
+}
 
 /***
     ###### WINDOWS EVENTS ####### 
@@ -85,16 +94,16 @@ window.addEventListener('mousedown', function(e) {
       if(controlDirPress != "" && controlOnce == true)
       {
         controlOnce = false;
-        // var tmp = 0;
-        // switch(controlDirPress)
-        // {
-        //   case "left": tmp = "11"; break;
-        //   case "right": tmp = "22"; break;
-        //   case "up": tmp = "33"; break;
-        //   case "down": tmp = "44"; break;
-        //   default: break;
-        // }
-        socket.emit("CONTROL-DIRECTIONS",controlDirPress); // Gửi thiết bị và giá trị trạng thái muốn điều khiển đến SERVER
+        var tmp = 0;
+        switch(controlDirPress)
+        {
+          case "left": tmp = "11"; break;
+          case "right": tmp = "22"; break;
+          case "up": tmp = "33"; break;
+          case "down": tmp = "44"; break;
+          default: break;
+        }
+        socket.emit("CONTROL_DIRECTIONS",tmp); // Gửi thiết bị và giá trị trạng thái muốn điều khiển đến SERVER
       }
     }
   }
@@ -110,6 +119,6 @@ window.addEventListener('mouseup', function() {
   controlDirPress = "";
   if(controlOnce == false)
   {
-    socket.emit("CONTROL-DIRECTIONS","00");
+    socket.emit("CONTROL_DIRECTIONS","00");
   }  
 });

@@ -26,4 +26,33 @@ exports.queryGetHistory = function (date) {
 	});
 }
 
+// Hàm này sẽ lưu giá trị mode
+exports.querySaveModeStatus = function (stt) {
+	return new Promise (function (resolve, reject) {
+		if(stt == false)
+			stt = 0;
+		else stt = 1;
+		pool.query("UPDATE mode SET mode = '" + stt +"';", function(err, rows, fields) { // Truy vấn
+			if (err){
+				resolve("querySaveModeStatus-ERROR");
+				return;
+			} 
+			else resolve("querySaveModeStatus-OK");
+		});
+	});
+}
+
+// Hàm này sẽ lấy giá trị trạng thái mode hiện tại
+exports.queryGetModeStatus = function () {
+	return new Promise (function (resolve, reject) {
+		pool.query("SELECT mode FROM mode;", function(err, rows, fields) { // Truy vấn
+			if (err){
+				resolve("queryGetModeStatus-ERROR");
+				return;
+			} 
+			else resolve(rows[0].mode);
+		});
+	});
+}
+
 
