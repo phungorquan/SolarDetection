@@ -37,13 +37,29 @@ io.on("connection", function(socket)
   // Lắng nghe route "SAVE_ENERGY" 
   // Hàm này lưu giá trị energy vào database đồng thời hiển thị giá trị lên các CLIENTS
   socket.on("SAVE_ENERGY", function(data) {
-    async function saveEnergy() {
-      result = await db.querySaveEnergy(data); 
-      if(result != "querySaveHistory-ERROR")
-        io.sockets.emit("displayEnergy",data);
-      else console.log(result);
+
+    var lastMin = 0;
+    async function getLastMinute() {
+      result = await db.queryGetLastMinute(); 
+      if(result != "EMPTY_DATA")
+        lastMin = result;
+
+      var currentTime = new Date(); // for now
+      var currentMin = currentTime.getMinutes();
+      if(currentMin % 5 == 0)
+      {
+        if(lastMin != currentMin)
+        {
+          async function saveEnergy() {
+            result = await db.querySaveEnergy(data); 
+            //if(result == "querySaveEnergy-ERROR")
+             // console.log(result);
+          }  
+          saveEnergy(); // Thực thi
+        }
+      }
     }  
-    saveHistory(); // Thực thi
+    getLastMinute(); // Thực thi
   });
 
 // Lắng nghe route "SAVE_MODE_STATUS"
