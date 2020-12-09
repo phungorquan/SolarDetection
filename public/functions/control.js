@@ -51,6 +51,14 @@ var controlOnce = false;
     document.getElementById('modeSlider').checked = stt;
   });
 
+function sendSocketControlDir(msg)
+{
+  var getMode =  document.getElementById('modeSlider').checked;
+  if(getMode == false)
+    socket.emit("CONTROL_DIRECTIONS",msg);  
+  console.log("You are in mode ", getMode ? "Auto" : "Manual");
+}
+
 // Hàm này điều khiển chạy mỗi khi nhấn và nhả liền
 function controlDirection(dir)
 {
@@ -66,7 +74,7 @@ function controlDirection(dir)
       case "down": tmp = "4d"; break;
       default: break;
     }
-    socket.emit("CONTROL_DIRECTIONS",tmp); // Gửi thiết bị và giá trị trạng thái muốn điều khiển đến SERVER
+    sendSocketControlDir(tmp); // Gửi thiết bị và giá trị trạng thái muốn điều khiển đến SERVER
   }
   else{
     controlOnce = true;
@@ -120,7 +128,7 @@ window.addEventListener('mousedown', function(e) {
           case "down": tmp = "44"; break;
           default: break;
         }
-        socket.emit("CONTROL_DIRECTIONS",tmp); // Gửi thiết bị và giá trị trạng thái muốn điều khiển đến SERVER
+        sendSocketControlDir(tmp); // Gửi thiết bị và giá trị trạng thái muốn điều khiển đến SERVER
       }
     }
   }
@@ -136,6 +144,6 @@ window.addEventListener('mouseup', function() {
   controlDirPress = "";
   if(controlOnce == false)
   {
-    socket.emit("CONTROL_DIRECTIONS","00");
+    sendSocketControlDir("00");
   }  
 });
