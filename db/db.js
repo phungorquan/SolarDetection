@@ -75,9 +75,15 @@ exports.queryGetHistory = function (date) {
 // Hàm này sẽ lưu giá trị mode
 exports.querySaveModeStatus = function (stt) {
 	return new Promise (function (resolve, reject) {
+		// Một số ký tự dạng char hoặc bool sẽ được đổi về số 
 		if(stt == false)
 			stt = 0;
-		else stt = 1;
+		else if (stt == true)
+			stt = 1;
+		if(stt == "0")
+			stt = 0;
+		else if (stt == "1")
+			stt = 1;
 		pool.query("UPDATE mode SET mode = '" + stt +"';", function(err, rows, fields) { // Truy vấn
 			if (err){
 				resolve("querySaveModeStatus-ERROR");

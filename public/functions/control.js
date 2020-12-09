@@ -4,7 +4,7 @@ var pressIntervalUpdate;
 var mouseIsDown = false;
 var controlOnce = false;
 
-  socket.emit("GET_MODE_STATUS");
+  socket.emit("GET_MODE_STATUS","DUMMY");
 
   // Nhận các thông báo về error thông qua route "ERROR"
   socket.on("ERROR",function(error)
@@ -39,6 +39,15 @@ var controlOnce = false;
 
   socket.on("MODE_WAS_CHANGED",function(stt)
   {
+    // Một số dữ liệu dạng char sẽ được đổi về số 
+    if(stt == '1')
+    {
+      stt = 1;
+    }
+    else if(stt == '0')
+    {
+      stt = 0;
+    }
     document.getElementById('modeSlider').checked = stt;
   });
 
@@ -67,6 +76,14 @@ function controlDirection(dir)
 function modeChange()
 {
   var getMode =  document.getElementById('modeSlider').checked;
+  if(getMode == true)
+  {
+    getMode = 1;
+  }
+  else if(getMode == false)
+  {
+    getMode = 0;
+  }
   socket.emit("SAVE_MODE_STATUS",getMode);
 }
 

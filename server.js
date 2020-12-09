@@ -30,13 +30,13 @@ io.on("connection", function(socket)
   // Lắng nghe route "CONTROL_DIRECTIONS"
   // Hàm này gửi lệnh điều khiển cho tất cả CLIENTS
   socket.on("CONTROL_DIRECTIONS",function(dir){
-      io.sockets.emit("NODE-control",dir);
+      io.sockets.emit("CONTROL_DIR",dir);
       console.log(dir);
   });
 
   // Lắng nghe route "SAVE_ENERGY" 
   // Hàm này lưu giá trị energy vào database đồng thời hiển thị giá trị lên các CLIENTS
-  socket.on("SAVE_ENERGY", function(data) {
+  socket.on("SAVE_ENERGYz", function(data) {
 
     var lastMin = 0;
     async function getLastMinute() {
@@ -76,7 +76,7 @@ io.on("connection", function(socket)
 
 // Lắng nghe route "GET_MODE_STATUS"
 // Hàm này lấy giá trị mode hiện tại và gửi đến client nào gọi nó
-  socket.on("GET_MODE_STATUS", function() {
+  socket.on("GET_MODE_STATUS", function(msg) {
     async function getModeStatus() {
       result = await db.queryGetModeStatus(); 
       if(result != "queryGetModeStatus-ERROR")
