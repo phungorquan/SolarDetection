@@ -51,6 +51,27 @@ var controlOnce = false;
     document.getElementById('modeSlider').checked = stt;
   });
 
+  socket.on("SOLAR_STATUS_CHANGED",function(stt)
+  {
+    // 0 Đang cân bằng -> SF.png
+    // 1 Đang left -> Nắng ở phair -> SL.png
+    // 2 Đang right -> Nắng ở trasi -> SR.png
+    // 3 Đang up -> Nắng ở dưới -> SU.png
+    // 4 Đang down -> Nắng ở trên -> SD.png
+    // 5 Đang off -> SO.png
+    
+    switch(parseInt(stt))
+    {
+      case 0: document.getElementById('solarStatus').src = "../img/SF.png"; break;
+      case 1: document.getElementById('solarStatus').src = "../img/SL.png"; break;
+      case 2: document.getElementById('solarStatus').src = "../img/SR.png"; break;
+      case 3: document.getElementById('solarStatus').src = "../img/SU.png"; break;
+      case 4: document.getElementById('solarStatus').src = "../img/SD.png"; break;
+      default: break;
+    }
+    
+  });
+
 function sendSocketControlDir(msg)
 {
   var getMode =  document.getElementById('modeSlider').checked;
