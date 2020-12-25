@@ -6,8 +6,9 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> <!-- Vietnamese -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="icon" type="image/png" href="../img/tabicon.png"><!--  Hiển thị hình cho tab -->
-<link rel="stylesheet" href="../css/dhthistory.css">
+<link rel="stylesheet" href="../css/history.css"> <!-- include File CSS tự tạo -->
 <link rel="stylesheet" href="../css/dashboard.css">	<!-- include File CSS tự tạo -->
+<link rel="stylesheet" href="../css/login.css">	<!-- include File CSS tự tạo -->
 		
 <style>
 
@@ -61,7 +62,7 @@ body {
 				<span style = "float: left;">Bằng tay</span>
 				<label class="switch" title = "Chuyển chế độ" style = "float: center;">
   					<input id = "modeSlider" type="checkbox" onchange="modeChange()" checked>
-  					<span class="sliderDHTType round"></span>
+  					<span class="sliderMode round"></span>
 				</label>
 				<span style = "float: right;">Tự dộng</span>
 				</td>
@@ -69,7 +70,16 @@ body {
 					<img id = "chart" width="80px" height="80px" style="cursor: pointer;" onclick="showChart()" title="Lịch sử điện áp" src="../img/History.png">
 				</td>
 			</tr>
-
+			<tr>
+				<td colspan = "2" style = "text-align: center;">  
+				<span style = "float: left;">Nghỉ ngơi</span>
+				<label class="switch" title = "Giả lập thời gian" style = "float: center;">
+  					<input id = "timeSlider" type="checkbox" onchange="timeChange()" checked>
+  					<span class="sliderMode round"></span>
+				</label>
+				<span style = "float: right;">Hoạt động</span>
+				</td>
+			</tr>
 		</table>
 
 	<div id="idHistoryChart" class="modal">
@@ -91,6 +101,23 @@ body {
   		</div>
 	</div>
 
+	<div id="idLogin" class="modalLogin">
+		<form class="modalLogin-content" name = "loginform">
+			<div class="imgcontainer">
+		  		<img src="/img/login.png" alt="Avatar" class="avatar">
+			</div>
+
+			<div class="containerLogin">
+		  		<label><b>ID</b></label>
+		  		<input id ="idUsr" type="text" placeholder="Enter Username" name="uname" required>
+		  		<label><b>Password</b></label> 
+		  		<input id ="idPsw" type="password" placeholder="Enter Password" name="psw" required>
+
+		   		<button id ="idBtn" type="button" onclick= "Login()">Login</button>
+			</div>
+ 		</form>
+	</div>
+
 
 </body>
 
@@ -101,8 +128,7 @@ body {
 <!-- Khai báo các file điều khiển -->
 <script src = "/functions/chart.js"></script>
 <script src = "/functions/control.js"></script>
-<!-- <script src = "/functions/history.js"></script>
-<script src = "/functions/dashboard.js"></script> -->
+<script src = "/functions/login.js"></script>
 <script type="text/javascript">
 
 // Hàm bên dưới đây sẽ thực hiện việc hiển thị thông tin khi người dùng trỏ chuột vào 1 trong các input (tooltip)

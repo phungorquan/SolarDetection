@@ -5,6 +5,7 @@ var mouseIsDown = false;
 var controlOnce = false;
 
   socket.emit("GET_MODE_STATUS","DUMMY");
+  socket.emit("GET_TIME_STATUS","DUMMY");
 
   // Nhận các thông báo về error thông qua route "ERROR"
   socket.on("ERROR",function(error)
@@ -49,6 +50,20 @@ var controlOnce = false;
       stt = 0;
     }
     document.getElementById('modeSlider').checked = stt;
+  });
+
+  socket.on("TIME_WAS_CHANGED",function(stt)
+  {
+    // Một số dữ liệu dạng char sẽ được đổi về số 
+    if(stt[1] == '1')
+    {
+      stt[1]  = 1;
+    }
+    else if(stt[1]  == '0')
+    {
+      stt[1] = 0;
+    }
+    document.getElementById('timeSlider').checked = parseInt(stt[1]);
   });
 
   socket.on("SOLAR_STATUS_CHANGED",function(stt)
@@ -114,6 +129,20 @@ function modeChange()
     getMode = 0;
   }
   socket.emit("SAVE_MODE_STATUS",getMode);
+}
+
+function timeChange()
+{
+  var getTime =  document.getElementById('timeSlider').checked;
+  if(getTime == true)
+  {
+    getTime = 1;
+  }
+  else if(getTime == false)
+  {
+    getTime = 0;
+  }
+  socket.emit("SAVE_TIME_STATUS",getTime);
 }
 
 /***
