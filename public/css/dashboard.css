@@ -1,94 +1,62 @@
-/* Sửa các ô vuông lớn bao các phòng tại đây*/
-.myRoomBox {
+/* Bên dưới để sửa thanh gạt tròn tròn nhỏ*/
+.switch {
+  position: relative;
   display: inline-block;
-  background-color: transparent;
-  width: 45vh;
-  height: 80vh;
-  padding: 30px;
-  text-align: center;
-  text-decoration: none;
-  border-radius: 20px;
-  margin:auto;
-  font-size:200%;
+  width: 60px;
+  height: 34px;
 }
 
-/* Sửa hai nút set/get thời gian tắt máy lạnh*/
-.myTimeButton{
-  border: none;
-  color: black;
-  background-color: #A0A0A0;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  width: 50px;
-  height: 35px;
+.switch input { 
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.sliderMode {
+  position: absolute;
   cursor: pointer;
-  border-radius: 15px;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: black;
+  -webkit-transition: 1s;
+  transition: 1s;
 }
 
-/* Sửa hai ô input thời gian*/
-.myTimeInput{
-  width: 40%;
-  padding: 12px 20px;
-  margin: 8px 0;
-  display: inline-block;
-  border: 1px solid #ccc;
-  box-sizing: border-box;
-  opacity:0.8;
-  border-radius: 20px;
+.sliderMode:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: 1s;
+  transition: 1s;
 }
 
-/* Sửa không gian nơi hiển thị hình và dữ liệu thực của DHT*/
-.myDHTData{
-  display: inline-block;
-  background-color: transparent;
-  width: 120px;
-  height: 120px;
-  padding: 20px;
-  text-align: center;
-  text-decoration: none;
-  border-radius: 20px;
-  margin:auto;
-  font-size:200%;
+input:checked + .sliderMode {
+  background-color: green;
 }
 
-/* Sửa thanh kéo đèn DIMMER */
-.sliderDimmerLight {
-  margin-top: 20px;
-  -webkit-appearance: none;
-  width: 100%;
-  height: 15px;
-  outline: none;
-  opacity: 0.8;
-  -webkit-transition: .2s;
-  transition: opacity .2s;
-  border-radius: 20px;
+input:focus + .sliderMode {
+  box-shadow: 0 0 0.2px green;
 }
 
-/* Sửa thanh kéo đèn DIMMER */
-.sliderDimmerLight:hover {
-  opacity: 1;
+input:checked + .sliderMode:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
 }
 
-/* Sửa thanh kéo đèn DIMMER */
-.sliderDimmerLight::-webkit-slider-thumb {
-  -webkit-appearance: none;
-  appearance: none;
-  width: 25px;
-  height: 25px;
-  background: gray;
-  cursor: pointer;
-  border-radius: 20px;
+/* Rounded sliders */
+.sliderMode.round {
+  border-radius: 34px;
 }
 
-/* Sửa thanh kéo đèn DIMMER */
-.sliderDimmerLight::-moz-range-thumb {
-  width: 25px;
-  height: 25px;
-  background: gray;
-  cursor: pointer;
-  border-radius: 20px;
+.sliderMode.round:before {
+  border-radius: 50%;
 }
 
 /* Sửa tooltip (khi trỏ chuột vào các ô nhỏ hiển thị chú thích cho người dùng) */
