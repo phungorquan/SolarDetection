@@ -56,9 +56,8 @@ io.on("connection", function(socket)
       result = await db.queryGetLastMinute(); 
       if(result != "EMPTY_DATA")
         lastMin = result;
-      var currentTime = new Date().toLocaleString('en-US', {
-        timeZone: 'Asia/Ho_Chi_Minh'
-      });
+
+      var currentTime = new Date(); // for now
       var currentMin = currentTime.getMinutes();
      if(currentMin % 5 == 0)
      {

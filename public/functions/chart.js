@@ -4,9 +4,7 @@ var Draw;
 
 // Hàm lấy ngày hôm nay và ép về kiểu như trong database để dễ xử lý
 function getToday() {
-  var today = new Date().toLocaleString('en-US', {
-        timeZone: 'Asia/Ho_Chi_Minh'
-      });    
+  var today = new Date();    // Lấy date theo định dặng mặc định nào đó
   var dd = today.getDate();    // Tách ngày
   var mm = today.getMonth() + 1; // Tách tháng nhưng phải +1 vì January trả về 0
   var yyyy = today.getFullYear();// Lấy năm 4 chữ số  
