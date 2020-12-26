@@ -61,9 +61,8 @@ io.on("connection", function(socket)
 
       var currentTime = new Date(); // for now
       var currentMin = currentTime.getMinutes();
-     if(currentMin % 5 == 0 && canSaveEnergy == true)
+     if(currentMin % 5 == 0)
      {
-        canSaveEnergy = false;
        //if(lastMin != currentMin)
        //{
           async function saveEnergy() {
@@ -71,7 +70,11 @@ io.on("connection", function(socket)
             if(result == "querySaveEnergy-ERROR")
               console.log(result);
           }  
-          saveEnergy(); // Thực thi
+          if(canSaveEnergy == true)
+          {
+            canSaveEnergy = false;
+            saveEnergy(); // Thực thi
+          }
        //}
      }
      else 
