@@ -51,28 +51,28 @@ io.on("connection", function(socket)
     io.sockets.emit("SOLAR_STATUS_CHANGED",getDirStatus);
 
 
-    // var lastMin = 0;
-    // async function getLastMinute() {
-    //   result = await db.queryGetLastMinute(); 
-    //   if(result != "EMPTY_DATA")
-    //     lastMin = result;
+    var lastMin = 0;
+    async function getLastMinute() {
+      result = await db.queryGetLastMinute(); 
+      if(result != "EMPTY_DATA")
+        lastMin = result;
 
-    //   var currentTime = new Date(); // for now
-    //   var currentMin = currentTime.getMinutes();
-    //   if(currentMin % 5 == 0)
-    //   {
-    //     if(lastMin != currentMin)
-    //     {
-    //       async function saveEnergy() {
-    //         result = await db.querySaveEnergy(data); 
-    //         //if(result == "querySaveEnergy-ERROR")
-    //          // console.log(result);
-    //       }  
-    //       saveEnergy(); // Thực thi
-    //     }
-    //   }
-    // }  
-    // getLastMinute(); // Thực thi
+      var currentTime = new Date(); // for now
+      var currentMin = currentTime.getMinutes();
+     if(currentMin % 5 == 0)
+     {
+       if(lastMin != currentMin)
+       {
+          async function saveEnergy() {
+            result = await db.querySaveEnergy(VaReality.toFixed(2)); 
+            if(result == "querySaveEnergy-ERROR")
+              console.log(result);
+          }  
+          saveEnergy(); // Thực thi
+       }
+     }
+    }  
+    getLastMinute(); // Thực thi
   });
 
 // Lắng nghe route "SAVE_MODE_STATUS"

@@ -91,7 +91,11 @@ function sendSocketControlDir(msg)
 {
   var getMode =  document.getElementById('modeSlider').checked;
   if(getMode == false)
-    socket.emit("CONTROL_DIRECTIONS",msg);  
+    {
+      socket.emit("CONTROL_DIRECTIONS",msg);  
+
+    }
+    socket.emit("SAVE_ENERGY",'11-4'); 
   console.log("You are in mode ", getMode ? "Auto" : "Manual");
 }
 
