@@ -16,6 +16,8 @@ server.listen(process.env.PORT || 3000, () => { // Server sẽ chạy trên port
    console.log('listening on *:3000');
 });
 
+var canSaveEnergy = true;
+
 // Hàm để lắng nghe sự kiện từ các CLIENTS
 io.on("connection", function(socket)
 {
@@ -59,18 +61,21 @@ io.on("connection", function(socket)
 
       var currentTime = new Date(); // for now
       var currentMin = currentTime.getMinutes();
-     if(currentMin % 5 == 0)
+     if(currentMin % 5 == 0 && canSaveEnergy == true)
      {
-       if(lastMin != currentMin)
-       {
+        canSaveEnergy = false;
+       //if(lastMin != currentMin)
+       //{
           async function saveEnergy() {
             result = await db.querySaveEnergy(VaReality.toFixed(2)); 
             if(result == "querySaveEnergy-ERROR")
               console.log(result);
           }  
           saveEnergy(); // Thực thi
-       }
+       //}
      }
+     else 
+      canSaveEnergy = true;
     }  
     getLastMinute(); // Thực thi
   });
