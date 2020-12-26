@@ -10,7 +10,12 @@ const pool = new Client({
     ssl:true
 });
 
-pool.connect();
+pool.connect(function(error){
+	console.log("Connected to db");
+	app.listen(PORT,function(){
+		console.log("listening at port " + PORT);
+	});
+});
 
 
 // Các hàm bên dưới sẽ được gọi từ file "server.js"
