@@ -12,9 +12,8 @@ const pool = new Client({
 
 pool.connect(function(error){
 	console.log("Connected to db");
-	app.listen(PORT,function(){
-		console.log("listening at port " + PORT);
-	});
+	if(error)
+		console.log(error);
 });
 
 

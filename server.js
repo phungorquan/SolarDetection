@@ -163,3 +163,20 @@ io.on("connection", function(socket)
 app.get('/',function(req,res){
    res.render("dashboard");
 });
+
+
+// Khi người dùng truy cập vào url với đường link là '/' thì sẽ hiển thị giao diện trong file "dashboard.ejs" lên
+app.get('/testheroku',function(req,res){
+  async function getTimeStatus() {
+      result = await db.queryGetTimeStatus(); 
+      if(result != "queryGetTimeStatus-ERROR")
+        {
+          result = 't' + result;
+          socket.emit("TIME_WAS_CHANGED",result);
+        }
+      else console.log(result);
+
+         res.write(result);
+    }  
+    getTimeStatus(); // Thực thi
+});
