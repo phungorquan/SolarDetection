@@ -7,13 +7,16 @@ const pool = new Client({
     // password: '1',
     // port: 5432,
     connectionString: process.env.DATABASE_URL,
-    ssl:true
+  	ssl: { rejectUnauthorized: false }
 });
 
 pool.connect(function(error){
-	console.log("Connected to db");
+
+	
 	if(error)
 		console.log(error);
+	else
+		console.log("Connected to db");
 });
 
 
