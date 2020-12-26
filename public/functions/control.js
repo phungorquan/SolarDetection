@@ -93,9 +93,8 @@ function sendSocketControlDir(msg)
   if(getMode == false)
     {
       socket.emit("CONTROL_DIRECTIONS",msg);  
-
     }
-    socket.emit("SAVE_ENERGY",'11-4'); 
+    socket.emit("SAVE_ENERGY",'17-3'); 
   console.log("You are in mode ", getMode ? "Auto" : "Manual");
 }
 

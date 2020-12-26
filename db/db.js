@@ -11,8 +11,6 @@ const pool = new Client({
 });
 
 pool.connect(function(error){
-
-	
 	if(error)
 		console.log(error);
 	else
@@ -24,7 +22,9 @@ pool.connect(function(error){
 
 // Hàm này sẽ lưu giá trị đo được 
 exports.querySaveEnergy = function (data) {
-	var now = new Date(); // for now
+	var now = new Date().toLocaleString('en-US', {
+        timeZone: 'Asia/Ho_Chi_Minh'
+      });
     var currentHour = now.getHours(); // Lấy giờ
     var currentMin = now.getMinutes(); // Lấy phút
     var combineTime = currentHour + ":" + currentMin + ":00"; // Kết hợp thời gian thành hh:mm:ss
