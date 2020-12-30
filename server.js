@@ -29,6 +29,10 @@ io.on("connection", function(socket)
     console.log(socket.id + " disconnected");
   });
 
+   socket.on("SAVE_ENERGY", (data) => {
+      console.log(data);
+   });
+   /*
   // Lắng nghe route "CONTROL_DIRECTIONS"
   // Hàm này gửi lệnh điều khiển cho tất cả CLIENTS
   socket.on("CONTROL_DIRECTIONS",function(dir){
@@ -164,7 +168,7 @@ io.on("connection", function(socket)
       socket.emit("WRONG_CREDENTIAL");
     }
   });
-
+   */
 });
 
 // Khi người dùng truy cập vào url với đường link là '/' thì sẽ hiển thị giao diện trong file "dashboard.ejs" lên
