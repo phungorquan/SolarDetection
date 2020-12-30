@@ -23,6 +23,11 @@ io.on("connection", function(socket)
 {
   // Xuất ra terminal id của CLIENTS kết nối tới
   console.log("Client connected: " + socket.id);
+   
+  setTimeout(()=>{
+     console.log("send back");
+     socket.emit("MODE_WAS_CHANGED", "hello");
+  },2000);
 
   // Xuất ra terminal id của CLIENTS vừa ngắt kết nối
   socket.on("disconnect", function() {
