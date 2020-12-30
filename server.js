@@ -35,7 +35,7 @@ io.on("connection", function(socket)
   });
 
    socket.on("SAVE_ENERGY", (data) => {
-      console.log(data);
+      console.log("event esp send");
    });
    /*
   // Lắng nghe route "CONTROL_DIRECTIONS"
