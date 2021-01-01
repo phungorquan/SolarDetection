@@ -23,22 +23,12 @@ io.on("connection", function(socket)
 {
   // Xuất ra terminal id của CLIENTS kết nối tới
   console.log("Client connected: " + socket.id);
-   
-  setTimeout(()=>{
-     console.log("send back");
-     socket.emit("MODE_WAS_CHANGED", "hello");
-  },2000);
 
   // Xuất ra terminal id của CLIENTS vừa ngắt kết nối
   socket.on("disconnect", function() {
     console.log(socket.id + " disconnected");
   });
 
-   socket.on("SAVE_ENERGY", (data) => {
-      console.log("data from esp ne", data);
-      console.log("event esp send");
-   });
-   /*
   // Lắng nghe route "CONTROL_DIRECTIONS"
   // Hàm này gửi lệnh điều khiển cho tất cả CLIENTS
   socket.on("CONTROL_DIRECTIONS",function(dir){
@@ -174,7 +164,7 @@ io.on("connection", function(socket)
       socket.emit("WRONG_CREDENTIAL");
     }
   });
-   */
+   
 });
 
 // Khi người dùng truy cập vào url với đường link là '/' thì sẽ hiển thị giao diện trong file "dashboard.ejs" lên
