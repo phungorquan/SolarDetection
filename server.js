@@ -35,6 +35,7 @@ io.on("connection", function(socket)
   });
 
    socket.on("SAVE_ENERGY", (data) => {
+      console.log("data from esp ne", data);
       console.log("event esp send");
    });
    /*
